@@ -42,18 +42,11 @@ placeholder_text = "Search Bar"
 layout_mode = 2
 text = "Clear"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MainPage/VBoxContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MainPage/VBoxContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainPage/VBoxContainer"]
 custom_minimum_size = Vector2(200, 505)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-
-[node name="Label" type="Label" parent="MainPage/VBoxContainer/ScrollContainer/VBoxContainer"]
-layout_mode = 2
-text = "Hello"
 
 [connection signal="dir_selected" from="MainPage/UploadShimeji" to="MainPage" method="_on_upload_shimeji_dir_selected"]
 [connection signal="pressed" from="MainPage/Button" to="MainPage" method="_on_button_pressed"]
