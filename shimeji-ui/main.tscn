@@ -1,59 +1,26 @@
-[gd_scene load_steps=2 format=3 uid="uid://dpwxne2rcvd8x"]
+[gd_scene load_steps=5 format=3 uid="uid://dpwxne2rcvd8x"]
 
 [ext_resource type="Script" uid="uid://chqj6264sqcjw" path="res://main.gd" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://bhlckdwyw2tbg" path="res://ShimejiPreview.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://di10lgoe8k3no" path="res://ScrollBox.tscn" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://ds7sddtr6dpey" path="res://FileLoader.tscn" id="4_1bvp3"]
 
 [node name="Node2D" type="Node2D"]
-
-[node name="MainPage" type="Node2D" parent="."]
 script = ExtResource("1_ig7tw")
 
-[node name="Shimeji" type="AnimatedSprite2D" parent="MainPage"]
-position = Vector2(586, 324)
+[node name="Shimeji" parent="." instance=ExtResource("2_0xm2m")]
+position = Vector2(585, 284)
 
-[node name="UploadShimeji" type="FileDialog" parent="MainPage"]
-title = "Open a Directory"
-position = Vector2i(250, 90)
-ok_button_text = "Select Current Folder"
-file_mode = 2
-access = 2
+[node name="ScrollBox" parent="." instance=ExtResource("3_h2yge")]
+visible = false
 
-[node name="Button" type="Button" parent="MainPage"]
-offset_left = 527.0
-offset_top = 524.0
-offset_right = 652.0
-offset_bottom = 555.0
-text = "Upload Frames"
+[node name="FileLoader" parent="." instance=ExtResource("4_1bvp3")]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainPage"]
-custom_minimum_size = Vector2(200, 200)
-offset_left = 14.0
-offset_top = 70.0
-offset_right = 240.0
-offset_bottom = 617.0
+[node name="Button" type="Button" parent="."]
+offset_left = 555.0
+offset_top = 601.0
+offset_right = 638.0
+offset_bottom = 632.0
+text = "Test Walk"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MainPage/VBoxContainer"]
-layout_mode = 2
-
-[node name="LineEdit" type="LineEdit" parent="MainPage/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-placeholder_text = "Search Bar"
-
-[node name="ClearSearch" type="Button" parent="MainPage/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "Clear"
-
-[node name="ScrollContainer" type="ScrollContainer" parent="MainPage/VBoxContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MainPage/VBoxContainer/ScrollContainer"]
-custom_minimum_size = Vector2(200, 505)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Label" type="Label" parent="MainPage/VBoxContainer/ScrollContainer/VBoxContainer"]
-layout_mode = 2
-text = "Hello"
-
-[connection signal="dir_selected" from="MainPage/UploadShimeji" to="MainPage" method="_on_upload_shimeji_dir_selected"]
-[connection signal="pressed" from="MainPage/Button" to="MainPage" method="_on_button_pressed"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

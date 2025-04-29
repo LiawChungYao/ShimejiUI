@@ -1,6 +1,8 @@
 extends Node2D
 
 @onready var container = $VBoxContainer/ScrollContainer/VBoxContainer
+@onready var search_box = $VBoxContainer/HBoxContainer/LineEdit
+@onready var clear_search = $VBoxContainer/HBoxContainer/Button
 
 func _ready() -> void:
 	print("ScrollBox Ready")
@@ -19,4 +21,7 @@ func test_populate_container() -> Array:
 func _populate_container(nodes: Array) -> void:
 	for n in nodes:
 		container.add_child(n)
-		
+
+func _on_button_pressed() -> void:
+	search_box.clear()
+	pass # Replace with function body.

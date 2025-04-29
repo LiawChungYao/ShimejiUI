@@ -1,10 +1,18 @@
-extends Node
+extends Node2D
 
-class_name AnimationPreview
-var shimeji_preview
+@onready var shimeji = $AnimatedSprite2D
+var fileloader:
+	set(value):
+		fileloader = value
 
-func initialize(sprite : AnimatedSprite2D) -> void:
-	shimeji_preview = sprite
+var data: Array:
+	set(value):
+		data = value
+
+func play_from_actions(anim_name: String) -> void:
+	for n in fileloader.actions_components:
+		if n["attributes"]["Name"] == anim_name:
+			preview_animation(n)
 
 func create_animation(name: String, image_paths: Array[String], durations: Array[int]) -> SpriteFrames:
 	print("Creating Animation: ", name)
@@ -29,7 +37,8 @@ func create_animation(name: String, image_paths: Array[String], durations: Array
 	return frames
 	
 func preview_animation(action_dict: Dictionary):
-	print("Previewing animation from Action:", action_dict.get("attributes", {}).get("Name", "Unknown"))
+	var animation_name = action_dict.get("attributes", {}).get("Name", "Unknown")
+	print("Previewing animation from Action:", name)
 
 	var image_paths: Array[String] = []
 	var durations: Array[int] = []
@@ -44,14 +53,12 @@ func preview_animation(action_dict: Dictionary):
 					if img_path != "":
 						image_paths.append(img_path)
 						durations.append(duration)
-	
-	if image_paths.is_empty():
-		print("No poses found for animation.")
-		return
 
-	var sprite_frames = create_animation(action_dict.get("attributes", {}).get("Name", "Unknown"), image_paths, durations)
-	shimeji_preview.frames = sprite_frames
-	shimeji_preview.play(action_dict.get("attributes", {}).get("Name", "Unknown"))
-	
-func what() -> void:
-	print("Shit")
+	var sprite_frames = create_animation(name, image_paths, durations)
+	play_animation(name, sprite_frames)
+
+
+
+func play_animation(name: String, frames: SpriteFrames) -> void:
+	shimeji.sprite_frames = frames
+	shimeji.play(name)

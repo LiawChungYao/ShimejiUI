@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://obbpol2einnu" path="res://scroll_box.gd" id="1_or83t"]
 
-[node name="Node2D" type="Node2D"]
+[node name="ScrollBox" type="Node2D"]
 script = ExtResource("1_or83t")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -17,6 +17,7 @@ layout_mode = 2
 [node name="LineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+placeholder_text = "Search"
 
 [node name="Button" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -30,3 +31,5 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Button" to="." method="_on_button_pressed"]
