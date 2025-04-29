@@ -3,6 +3,10 @@ extends Node2D
 @onready var fd_upload = $UploadShimeji
 @onready var fd_button = $Button
 
+var scrollbox:
+	set(value):
+		scrollbox = value
+
 var has_private_config = false
 var image_path: Array[String] = []:
 	get:
@@ -63,6 +67,8 @@ func _on_upload_shimeji_dir_selected(dir: String) -> void:
 		actions = parse_xml_to_dict(xml_path, dir)
 		actions_actual = actions["children"][1]["children"]
 		actions_components = actions["children"][0]["children"]
+		scrollbox.populate_container(scrollbox.action_component_buttons())
+		scrollbox.visible = true
 	pass
 	
 

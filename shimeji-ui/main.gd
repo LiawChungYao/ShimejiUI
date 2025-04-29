@@ -11,10 +11,9 @@ var action_data: Array = []
 func _ready():
 	print("Hello")
 	shimeji.fileloader = fileloader
-	
-	
-
-
+	scrollbox.fileloader = fileloader
+	scrollbox.shimeji = shimeji
+	fileloader.scrollbox = scrollbox
 
 func _on_button_pressed() -> void:
 	shimeji.play_from_actions("Walk")
